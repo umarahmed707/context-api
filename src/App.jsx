@@ -3,14 +3,14 @@ import { Navigate, Route, Routes } from 'react-router';
 import Login from './Pages/Login';
 import Home from './Pages/Home';
 import Profile from './Pages/Profile';
-import { useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { GlobalContext } from './Context/Context';
 import axios from 'axios';
 
 function App() {
   const { state, dispatch } = useContext(GlobalContext);
 
-  const checkuser = async () => {
+  const checkuser = useCallback(async () => {
     const userToken = localStorage.getItem("userToken");
 
     if (!userToken) {
@@ -28,11 +28,11 @@ function App() {
       dispatch({ type: "USER_LOGOUT" });
       console.log(error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     checkuser();
-  }, []);
+  }, [checkuser]);
 
   return (
     <div>

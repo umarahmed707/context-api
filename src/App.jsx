@@ -28,7 +28,7 @@ function App() {
       dispatch({ type: "USER_LOGOUT" });
       console.log(error);
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     checkuser();
